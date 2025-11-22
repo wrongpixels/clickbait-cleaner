@@ -34,7 +34,7 @@ const renderGlobalList = () => {
   currentSettings.globalKeywords.forEach((kw, idx) => {
     const div = document.createElement('div')
     div.className = 'item'
-    div.innerHTML = `<span>${kw}</span><span class="btn-del">&times;</span>`
+    div.innerHTML = `<span>${kw}</span><span class="btn-del" title="Remove keyword">&times;</span>`
     div.querySelector('.btn-del').onclick = () => {
       currentSettings.globalKeywords.splice(idx, 1)
 
@@ -92,7 +92,7 @@ const renderSiteDetails = () => {
   config.localKeywords.forEach((kw, idx) => {
     const div = document.createElement('div')
     div.className = 'item'
-    div.innerHTML = `<span>${kw}</span><span class="btn-del">&times;</span>`
+    div.innerHTML = `<span>${kw}</span><span class="btn-del" title="Remove keyword">&times;</span>`
     div.querySelector('.btn-del').onclick = () => {
       config.localKeywords.splice(idx, 1)
       save()
@@ -105,14 +105,14 @@ const renderSiteDetails = () => {
   exContainer.innerHTML = ''
   if (config.disabledGlobals.length === 0) {
     exContainer.innerHTML =
-      '<div style="color:#ccc; font-size:12px; padding:5px;">No global keywords disabled for this site.</div>'
+      '<div style="color:#ccc; font-size:12px; padding:5px;">No exceptions added</div>'
   }
   config.disabledGlobals.forEach((kw) => {
     const div = document.createElement('div')
     div.className = 'item'
     div.innerHTML = `
-        <span style="text-decoration: line-through; color: #999;">${kw}</span>
-        <span class="btn-del" title="Re-enable">Enable</span>
+        <span style="color: #999;">${kw}</span>
+        <span class="btn-del" title="Remove exception">&times;</span>
     `
     div.querySelector('.btn-del').onclick = () => {
       config.disabledGlobals = config.disabledGlobals.filter((k) => k !== kw)

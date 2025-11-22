@@ -70,8 +70,9 @@
         color: #666;
       }
       .input-area {
-        padding: 16px;
+        padding: 10px;
         border-bottom: 1px solid var(--border);
+        font-size: 12px;
       }
       .input-group {
         display: flex;
@@ -83,7 +84,7 @@
         padding: 8px;
         border: 1px solid var(--border);
         border-radius: 4px;
-        font-size: 13px;
+        font-size: 12px;
       }
       .btn-group {
         display: flex;
@@ -116,14 +117,15 @@
         overflow-y: auto;
       }
       .list-section {
-        padding: 0 16px 16px;
+        padding: 0 16px 10px;
+        border-bottom: 1px solid #f0f0f0;
       }
       .list-header {
         font-size: 11px;
         font-weight: 700;
         color: #999;
         text-transform: uppercase;
-        margin: 12px 0 8px;
+        margin: 8px 0 8px;
         display: flex;
         justify-content: space-between;
       }
@@ -131,8 +133,7 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding: 6px 0;
-        border-bottom: 1px solid #f0f0f0;
+        padding: 2px 5px;
         font-size: 13px;
       }
       .keyword-left {
@@ -151,6 +152,7 @@
       }
 
       .toggle-switch {
+        color: #999;
         position: relative;
         display: inline-block;
         width: 32px;
@@ -184,7 +186,7 @@
         border-radius: 50%;
       }
       input:checked + .slider {
-        background-color: var(--primary);
+        background-color: #019e62;
       }
       input:checked + .slider:before {
         transform: translateX(14px);
@@ -250,7 +252,7 @@
         text-decoration: underline;
       }
       #gh-footer {
-        padding: 8px;
+        padding: 10px;
         align-items: center;
         justify-content: center;
         font-size: 12px;
@@ -269,10 +271,11 @@
       a {
         color: inherit;
         text-decoration: none;
+        color: #008dce;
       }
 
       a:hover {
-        text-decoration: underline;
+        color: #3ca4d4;
       }
 
       #site-controls-wrapper {
@@ -287,7 +290,7 @@
         <span class="title">Clickbait Cleaner</span>
       </div>
       <div class="main-toggle">
-        <span id="status-text">Active</span>
+        <span id="status-text">Paused</span>
         <label class="toggle-switch">
           <input type="checkbox" id="global-enable" />
           <span class="slider"></span>
@@ -298,7 +301,7 @@
     <div class="site-control">
       <div class="site-info">
         <span class="site-url" id="current-hostname"
-          >Enabled for this website</span
+          >Disabled for this website</span
         >
       </div>
       <label class="toggle-switch">
@@ -321,7 +324,7 @@
       <div class="lists-container">
         <div class="list-section">
           <div class="list-header">
-            <span>Blocked in this site</span>
+            <span>Blocked on this site</span>
           </div>
           <div id="local-list"></div>
         </div>

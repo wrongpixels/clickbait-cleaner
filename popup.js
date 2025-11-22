@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   const updateUI = () => {
     globalEnableEl.checked = settings.enabled
-    statusText.textContent = settings.enabled ? 'Active' : 'Inactive'
+    statusText.textContent = settings.enabled ? 'Active' : 'Paused'
     statusText.style.color = settings.enabled ? '#e10f1a' : '#999'
 
     if (hostname) {
@@ -62,7 +62,6 @@ document.addEventListener('DOMContentLoaded', async () => {
       controlsWrapper.style.display = 'none'
     }
   }
-
   const renderLists = () => {
     localListEl.innerHTML = ''
     globalListEl.innerHTML = ''
@@ -92,7 +91,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     if (siteConfig.localKeywords.length === 0) {
       localListEl.innerHTML =
-        '<div style="font-size:11px; color:#ccc; padding:4px 0;">No local keywords</div>'
+        '<div style="font-size:11px; color:#ccc; padding:4px 0;">No keywords added yet</div>'
     }
 
     settings.globalKeywords.forEach((kw, idx) => {
@@ -158,7 +157,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     if (settings.globalKeywords.length === 0) {
       globalListEl.innerHTML =
-        '<div style="font-size:11px; color:#ccc; padding:4px 0;">No global keywords</div>'
+        '<div style="font-size:11px; color:#ccc; padding:4px 0;">No keywords added yet</div>'
     }
   }
 
@@ -190,6 +189,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     await saveSettings(settings)
     updateUI()
   })
+  updateUI()
 
   const addKeyword = async (type) => {
     const val = inputEl.value.trim()

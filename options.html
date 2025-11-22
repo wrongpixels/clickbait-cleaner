@@ -21,9 +21,9 @@
         overflow: hidden;
       }
       .header {
-        background: #e10f1a;
-        color: white;
-        padding: 20px 30px;
+        background: #f5f5f5;
+        color: rgb(26, 26, 26);
+        padding: 15px 50px;
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -32,11 +32,16 @@
         margin: 0;
         font-size: 24px;
       }
+      .header-title {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
       .content {
-        padding: 30px;
+        padding: 10px 50px;
         display: grid;
         grid-template-columns: 1fr 1fr;
-        gap: 40px;
+        gap: 50px;
       }
       h2 {
         font-size: 18px;
@@ -46,15 +51,15 @@
       }
 
       .control-group {
-        margin-bottom: 20px;
+        margin-bottom: 10px;
       }
       select {
         width: 100%;
-        padding: 10px;
+        padding: 6px;
         font-size: 14px;
         border: 1px solid #ddd;
         border-radius: 4px;
-        margin-bottom: 10px;
+        margin-bottom: 5;
       }
 
       .list-container {
@@ -71,8 +76,8 @@
         justify-content: space-between;
         align-items: center;
         background: white;
-        padding: 8px 12px;
-        margin-bottom: 6px;
+        padding: 5px 12px;
+        margin-bottom: 3px;
         border-radius: 4px;
         border: 1px solid #eee;
         font-size: 14px;
@@ -84,15 +89,16 @@
       }
       .btn-del {
         color: #999;
+        font-size: 16px;
+        color: #e43f48;
         cursor: pointer;
-        font-weight: bold;
       }
       .btn-del:hover {
         color: #e10f1a;
       }
 
       .toggle-label {
-        font-size: 12px;
+        font-size: 11px;
         color: #666;
         display: flex;
         align-items: center;
@@ -102,7 +108,7 @@
       .input-row {
         display: flex;
         gap: 10px;
-        margin-bottom: 15px;
+        margin-bottom: 10px;
       }
       input[type='text'] {
         flex: 1;
@@ -112,7 +118,7 @@
       }
       button {
         padding: 8px 16px;
-        background: #333;
+        background: #019e62;
         color: white;
         border: none;
         border-radius: 4px;
@@ -130,8 +136,9 @@
         border-top: 1px solid #eee;
       }
       #gh-footer {
-        padding: 2px;
+        padding: 12px;
         align-items: center;
+        justify-content: center;
         font-size: 12px;
         display: flex;
         gap: 4px;
@@ -148,9 +155,11 @@
       a {
         color: inherit;
         text-decoration: none;
+        color: #008dce;
       }
 
       a:hover {
+        color: #3ca4d4;
         text-decoration: underline;
       }
     </style>
@@ -159,10 +168,18 @@
     <div class="container">
       .
       <div class="header">
-        <h1>Clickbait Cleaner Settings</h1>
+        <div class="header-title">
+          <img src="assets/icon-full.png" width="60" height="60" alt="Icon" />
+          <h1>Clickbait Cleaner | Settings</h1>
+        </div>
         <div
           id="save-status"
-          style="font-size: 14px; opacity: 0; transition: opacity 0.3s"
+          style="
+            font-size: 14px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-weight: bold;
+          "
         >
           Settings Saved!
         </div>
@@ -170,12 +187,12 @@
 
       <div class="content">
         <div>
-          <h2>Global Keywords</h2>
+          <h2>Blocked everywhere</h2>
           <div class="input-row">
             <input
               type="text"
               id="global-input"
-              placeholder="Add global keyword..."
+              placeholder="Add keywords..."
             />
             <button id="global-add">Add</button>
           </div>
@@ -183,7 +200,7 @@
         </div>
 
         <div>
-          <h2>Site Configuration</h2>
+          <h2>Per-site configuration</h2>
           <div class="control-group">
             <select id="site-select">
               <option value="">Select a site to configure...</option>
@@ -191,23 +208,22 @@
           </div>
 
           <div id="site-details" style="display: none">
+            <h3>Blocked only on this site</h3>
             <div class="input-row">
               <input
                 type="text"
                 id="local-input"
-                placeholder="Add local keyword for this site..."
+                placeholder="Add keywords..."
               />
               <button id="local-add">Add</button>
             </div>
-
-            <h3>Local Keywords</h3>
             <div
               class="list-container"
               id="local-list"
               style="height: 150px; margin-bottom: 20px"
             ></div>
 
-            <h3>Global Exceptions (Disabled Here)</h3>
+            <h3>Exceptions allowed on this site</h3>
             <div
               class="list-container"
               id="exceptions-list"
@@ -219,7 +235,7 @@
             id="no-site-msg"
             style="color: #999; text-align: center; padding-top: 50px"
           >
-            Select a site from the dropdown to manage its specific rules.
+            Select a site to manage its specific rules.
           </div>
         </div>
       </div>

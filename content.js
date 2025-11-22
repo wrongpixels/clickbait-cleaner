@@ -59,9 +59,14 @@ const processArticles = () => {
       return
     }
 
+    //we look for the article's h2
     const h2 = article.querySelector('h2')
+
+    //looking for the text inside the h2 would be ideal, but lots of pages add section names outside it
+    //we simply confirm we have a displayable h2 and look inside
+    //the whole article for out textContent match
     if (h2) {
-      const text = normalizeString(h2.textContent)
+      const text = normalizeString(article.textContent)
       const match = keywords.some((k) => text.includes(k))
       if (match) {
         blockedCount += hideElement(article)

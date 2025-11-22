@@ -36,7 +36,7 @@ Toggle the extension on/off globally, disable it for specific sites, or add exce
 
 This extension works by finding standard HTML `<article>` tags. Most modern news sites use these, but some major outlets like BBC or CNN use custom structures that need to be studied individually.
 
-If it doesn't work on a specific site, just open an issue and I'll look into it to add support for it!
+If it doesn't work on a specific site, just open an issue and I'll look into adding support for it!
 
 ----
 

@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Options</title>
+    <style>
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+        background: #f5f5f5;
+        color: #333;
+        margin: 0;
+        padding: 40px;
+      }
+      .container {
+        max-width: 900px;
+        margin: 0 auto;
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        overflow: hidden;
+      }
+      .header {
+        background: #e10f1a;
+        color: white;
+        padding: 20px 30px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .header h1 {
+        margin: 0;
+        font-size: 24px;
+      }
+      .content {
+        padding: 30px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+      }
+      h2 {
+        font-size: 18px;
+        margin-bottom: 15px;
+        border-bottom: 2px solid #eee;
+        padding-bottom: 10px;
+      }
+
+      .control-group {
+        margin-bottom: 20px;
+      }
+      select {
+        width: 100%;
+        padding: 10px;
+        font-size: 14px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        margin-bottom: 10px;
+      }
+
+      .list-container {
+        border: 1px solid #eee;
+        border-radius: 4px;
+        height: 400px;
+        overflow-y: auto;
+        padding: 10px;
+        background: #fafafa;
+      }
+
+      .item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: white;
+        padding: 8px 12px;
+        margin-bottom: 6px;
+        border-radius: 4px;
+        border: 1px solid #eee;
+        font-size: 14px;
+      }
+      .item-actions {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+      }
+      .btn-del {
+        color: #999;
+        cursor: pointer;
+        font-weight: bold;
+      }
+      .btn-del:hover {
+        color: #e10f1a;
+      }
+
+      .toggle-label {
+        font-size: 12px;
+        color: #666;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+      }
+
+      .input-row {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 15px;
+      }
+      input[type='text'] {
+        flex: 1;
+        padding: 8px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+      }
+      button {
+        padding: 8px 16px;
+        background: #333;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+      button:hover {
+        opacity: 0.9;
+      }
+
+      .footer {
+        padding: 20px;
+        text-align: center;
+        color: #999;
+        font-size: 12px;
+        border-top: 1px solid #eee;
+      }
+      #gh-footer {
+        padding: 2px;
+        align-items: center;
+        font-size: 12px;
+        display: flex;
+        gap: 4px;
+        color: #6b6b6b;
+        text-decoration: none;
+      }
+
+      #gh-footer-link {
+        border-radius: 4px;
+        font-size: 12px;
+        font-weight: bold;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      .
+      <div class="header">
+        <h1>Clickbait Cleaner Settings</h1>
+        <div
+          id="save-status"
+          style="font-size: 14px; opacity: 0; transition: opacity 0.3s"
+        >
+          Settings Saved!
+        </div>
+      </div>
+
+      <div class="content">
+        <div>
+          <h2>Global Keywords</h2>
+          <div class="input-row">
+            <input
+              type="text"
+              id="global-input"
+              placeholder="Add global keyword..."
+            />
+            <button id="global-add">Add</button>
+          </div>
+          <div class="list-container" id="global-list"></div>
+        </div>
+
+        <div>
+          <h2>Site Configuration</h2>
+          <div class="control-group">
+            <select id="site-select">
+              <option value="">Select a site to configure...</option>
+            </select>
+          </div>
+
+          <div id="site-details" style="display: none">
+            <div class="input-row">
+              <input
+                type="text"
+                id="local-input"
+                placeholder="Add local keyword for this site..."
+              />
+              <button id="local-add">Add</button>
+            </div>
+
+            <h3>Local Keywords</h3>
+            <div
+              class="list-container"
+              id="local-list"
+              style="height: 150px; margin-bottom: 20px"
+            ></div>
+
+            <h3>Global Exceptions (Disabled Here)</h3>
+            <div
+              class="list-container"
+              id="exceptions-list"
+              style="height: 150px"
+            ></div>
+          </div>
+
+          <div
+            id="no-site-msg"
+            style="color: #999; text-align: center; padding-top: 50px"
+          >
+            Select a site from the dropdown to manage its specific rules.
+          </div>
+        </div>
+      </div>
+
+      <span id="gh-footer">
+        <img src="assets/github-mark.svg" alt="GitHub logo" width="16" />
+        by
+        <span id="gh-footer-link">
+          @<a
+            href="https://github.com/wrongpixels/fix-comentarios-marca"
+            target="_blank"
+            >wrongpixels</a
+          >
+        </span>
+      </span>
+    </div>
+    <script src="options.js"></script>
+  </body>
+</html>

@@ -1,0 +1,352 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Clickbait Cleaner</title>
+    <style>
+      :root {
+        --primary: #e10f1a;
+        --bg: #ffffff;
+        --text: #333333;
+        --gray: #f5f5f5;
+        --border: #e0e0e0;
+      }
+      body {
+        width: 320px;
+        margin: 0;
+        font-family:
+          -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
+          Cantarell, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+      }
+      .header {
+        padding: 16px;
+        border-bottom: 1px solid var(--border);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .header-title {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+      }
+      .title {
+        font-weight: bold;
+        font-size: 18px;
+        letter-spacing: -0.5px;
+      }
+      .main-toggle {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 12px;
+        font-weight: 600;
+      }
+      .site-control {
+        padding: 12px 16px;
+        background: var(--gray);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid var(--border);
+      }
+      .site-info {
+        display: flex;
+        flex-direction: column;
+      }
+      .site-url {
+        font-size: 11px;
+        max-width: 180px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        color: #666;
+      }
+      .site-label {
+        font-size: 10px;
+        color: #666;
+      }
+      .input-area {
+        padding: 16px;
+        border-bottom: 1px solid var(--border);
+      }
+      .input-group {
+        display: flex;
+        gap: 8px;
+        margin-bottom: 8px;
+      }
+      input[type='text'] {
+        flex: 1;
+        padding: 8px;
+        border: 1px solid var(--border);
+        border-radius: 4px;
+        font-size: 13px;
+      }
+      .btn-group {
+        display: flex;
+        gap: 8px;
+      }
+      button {
+        flex: 1;
+        padding: 6px;
+        border: none;
+        border-radius: 4px;
+        font-size: 11px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: opacity 0.2s;
+      }
+      button:hover {
+        opacity: 0.8;
+      }
+      .btn-primary {
+        background: var(--primary);
+        color: white;
+      }
+      .btn-secondary {
+        background: #333;
+        color: white;
+      }
+
+      .lists-container {
+        max-height: 300px;
+        overflow-y: auto;
+      }
+      .list-section {
+        padding: 0 16px 16px;
+      }
+      .list-header {
+        font-size: 11px;
+        font-weight: 700;
+        color: #999;
+        text-transform: uppercase;
+        margin: 12px 0 8px;
+        display: flex;
+        justify-content: space-between;
+      }
+      .keyword-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 6px 0;
+        border-bottom: 1px solid #f0f0f0;
+        font-size: 13px;
+      }
+      .keyword-left {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .delete-btn {
+        color: #999;
+        cursor: pointer;
+        font-weight: bold;
+        padding: 0 4px;
+      }
+      .delete-btn:hover {
+        color: var(--primary);
+      }
+
+      .toggle-switch {
+        position: relative;
+        display: inline-block;
+        width: 32px;
+        height: 18px;
+      }
+      .toggle-switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+      }
+      .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        transition: 0.4s;
+        border-radius: 18px;
+      }
+      .slider:before {
+        position: absolute;
+        content: '';
+        height: 14px;
+        width: 14px;
+        left: 2px;
+        bottom: 2px;
+        background-color: white;
+        transition: 0.4s;
+        border-radius: 50%;
+      }
+      input:checked + .slider {
+        background-color: var(--primary);
+      }
+      input:checked + .slider:before {
+        transform: translateX(14px);
+      }
+
+      .mini-toggle {
+        position: relative;
+        display: inline-block;
+        width: 24px;
+        height: 14px;
+      }
+      .mini-toggle input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+      }
+      .mini-slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        transition: 0.2s;
+        border-radius: 14px;
+      }
+      .mini-slider:before {
+        position: absolute;
+        content: '';
+        height: 10px;
+        width: 10px;
+        left: 2px;
+        bottom: 2px;
+        background-color: white;
+        transition: 0.2s;
+        border-radius: 50%;
+      }
+      input:checked + .mini-slider {
+        background-color: #01a373;
+      }
+      input:checked + .mini-slider:before {
+        transform: translateX(10px);
+      }
+
+      .footer {
+        padding: 12px;
+        text-align: center;
+        font-size: 10px;
+        color: #999;
+        background: #fafafa;
+        border-top: 1px solid var(--border);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .link {
+        color: inherit;
+        text-decoration: none;
+        cursor: pointer;
+      }
+      .link:hover {
+        text-decoration: underline;
+      }
+      #gh-footer {
+        padding: 8px;
+        align-items: center;
+        justify-content: center;
+        font-size: 12px;
+        display: flex;
+        gap: 4px;
+        color: #6b6b6b;
+        text-decoration: none;
+      }
+
+      #gh-footer-link {
+        border-radius: 4px;
+        font-size: 12px;
+        font-weight: bold;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+
+      #site-controls-wrapper {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <div class="header-title">
+        <img src="assets/icon-full.png" width="40" height="40" alt="Icon" />
+        <span class="title">Clickbait Cleaner</span>
+      </div>
+      <div class="main-toggle">
+        <span id="status-text">Active</span>
+        <label class="toggle-switch">
+          <input type="checkbox" id="global-enable" />
+          <span class="slider"></span>
+        </label>
+      </div>
+    </div>
+
+    <div class="site-control">
+      <div class="site-info">
+        <span class="site-url" id="current-hostname"
+          >Enabled for this website</span
+        >
+      </div>
+      <label class="toggle-switch">
+        <input type="checkbox" id="site-enable" />
+        <span class="slider"></span>
+      </label>
+    </div>
+
+    <div id="site-controls-wrapper">
+      <div class="input-area">
+        <div class="input-group">
+          <input type="text" id="new-keyword" placeholder="Enter keyword..." />
+        </div>
+        <div class="btn-group">
+          <button class="btn-primary" id="add-global">Block Everywhere</button>
+          <button class="btn-secondary" id="add-local">Block Here</button>
+        </div>
+      </div>
+
+      <div class="lists-container">
+        <div class="list-section">
+          <div class="list-header">
+            <span>Blocked in this site</span>
+          </div>
+          <div id="local-list"></div>
+        </div>
+
+        <div class="list-section">
+          <div class="list-header">
+            <span>Blocked everywhere</span>
+          </div>
+          <div id="global-list"></div>
+        </div>
+      </div>
+    </div>
+
+    <footer id="gh-footer">
+      <img src="assets/github-mark.svg" alt="GitHub logo" width="16" />
+      by
+      <span id="gh-footer-link">
+        @<a
+          href="https://github.com/wrongpixels/clickbait-cleaner"
+          target="_blank"
+          >wrongpixels</a
+        >
+      </span>
+    </footer>
+
+    <script src="popup.js"></script>
+  </body>
+</html>

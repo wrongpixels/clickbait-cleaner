@@ -213,13 +213,13 @@ document.addEventListener('DOMContentLoaded', async () => {
     renderLists()
   }
 
-  addGlobalBtn.onclick = () => addKeyword('global')
-  addLocalBtn.onclick = () => addKeyword('local')
+  addGlobalBtn?.onclick = () => addKeyword('global')
+  addLocalBtn?.onclick = () => addKeyword('local')
   inputEl.addEventListener('keypress', (e) => {
     if (e.key === 'Enter') addKeyword('global')
   })
 
-  optionsBtn.onclick = () => {
+  optionsBtn?.onclick = () => {
     if (chrome.runtime.openOptionsPage) {
       chrome.runtime.openOptionsPage()
     } else {

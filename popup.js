@@ -62,6 +62,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       controlsWrapper.style.display = 'none'
     }
   }
+
   const renderLists = () => {
     localListEl.innerHTML = ''
     globalListEl.innerHTML = ''
@@ -109,16 +110,23 @@ document.addEventListener('DOMContentLoaded', async () => {
       checkbox.checked = isEnabledHere
 
       checkbox.onchange = async (e) => {
-        if (e.target.checked) {
-          siteConfig.disabledGlobals = siteConfig.disabledGlobals.filter(
-            (k) => k !== kw,
-          )
-        } else {
-          if (!siteConfig.disabledGlobals.includes(kw)) {
-            siteConfig.disabledGlobals.push(kw)
+        if (!settings.sites[hostname]) {
+          settings.sites[hostname] = {
+            enabled: true,
+            localKeywords: [],
+            disabledGlobals: [],
           }
         }
-        settings.sites[hostname] = siteConfig
+        const currentSiteConfig = settings.sites[hostname]
+
+        if (e.target.checked) {
+          currentSiteConfig.disabledGlobals =
+            currentSiteConfig.disabledGlobals.filter((k) => k !== kw)
+        } else {
+          if (!currentSiteConfig.disabledGlobals.includes(kw)) {
+            currentSiteConfig.disabledGlobals.push(kw)
+          }
+        }
         await saveSettings(settings)
       }
 
@@ -182,14 +190,11 @@ document.addEventListener('DOMContentLoaded', async () => {
     } else {
       if (settings.sites[hostname]) {
         settings.sites[hostname].enabled = false
-
-        delete settings.sites[hostname]
       }
     }
     await saveSettings(settings)
     updateUI()
   })
-  updateUI()
 
   const addKeyword = async (type) => {
     const val = inputEl.value.trim()
@@ -201,6 +206,14 @@ document.addEventListener('DOMContentLoaded', async () => {
       }
     } else {
       if (hostname) {
+        if (!settings.sites[hostname]) {
+          settings.sites[hostname] = {
+            enabled: true,
+            localKeywords: [],
+            disabledGlobals: [],
+          }
+        }
+
         const conf = settings.sites[hostname]
         if (!conf.localKeywords.includes(val)) {
           conf.localKeywords.push(val)
@@ -213,17 +226,19 @@ document.addEventListener('DOMContentLoaded', async () => {
     renderLists()
   }
 
-  addGlobalBtn?.onclick = () => addKeyword('global')
-  addLocalBtn?.onclick = () => addKeyword('local')
+  addGlobalBtn.onclick = () => addKeyword('global')
+  addLocalBtn.onclick = () => addKeyword('local')
   inputEl.addEventListener('keypress', (e) => {
     if (e.key === 'Enter') addKeyword('global')
   })
 
-  optionsBtn?.onclick = () => {
-    if (chrome.runtime.openOptionsPage) {
-      chrome.runtime.openOptionsPage()
-    } else {
-      window.open(chrome.runtime.getURL('options.html'))
+  if (optionsBtn) {
+    optionsBtn.onclick = () => {
+      if (chrome.runtime.openOptionsPage) {
+        chrome.runtime.openOptionsPage()
+      } else {
+        window.open(chrome.runtime.getURL('options.html'))
+      }
     }
   }
 

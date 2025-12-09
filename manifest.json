@@ -2,6 +2,7 @@
   "manifest_version": 3,
   "name": "Clickbait Cleaner",
   "version": "1.0.1",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAnoStADpR7ONuT7PrwKVY/4Et6G1Zxl58rBD7tMELGwoEl7mAt0bt12VSomub6x/D4FjcUDWxyUjfCAGJl/1KGpi5sHsTHO1lfZICW8OX8G8Z9GZjdgFYiJB56pUNV+KnyvbYUv2zkS14PpafLK5IP39RQBePEqb750QrsModwhtqZoW1W++i/+EoLL4/JCjoEgwPuOPaDEZPIUMKXdT80+xxc2AA9V7Wf47+AJ4yjGJ6iAr+LgSvRbgb7h/mOhkqg7qwZY9vL8q5mCbxPNnuvWXht2gxElHa4P3iJkG3Cpp6qGpt9050oMnrqPSOao4Tmy3Ky9biQnRgLrfYa1z0QwIDAQAB",
   "description": "Block clickbait headlines from any website using custom keywords.",
   "permissions": ["storage", "activeTab", "scripting"],
   "host_permissions": ["<all_urls>"],
